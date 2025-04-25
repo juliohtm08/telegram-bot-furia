@@ -10,8 +10,8 @@ class BotController {
     // comando '/test'
     this.bot.command('test', this.commands.test);
 
-    // comando '/welcome'
-    this.bot.command('welcome', this.commands.welcome);
+    // comando '/jogos'
+    this.bot.command('jogos', (ctx) => this.commands.jogos(ctx));
   }
 }
 
