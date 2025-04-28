@@ -8,8 +8,6 @@ const FURIA_TEAM_ID = 124530;
 const fetchMatches = async (status) => {
   const url = `${BASE_URL}/csgo/matches?filter[opponent_id]=${FURIA_TEAM_ID}&filter[${status}]=true&range[begin_at]=2025-01-01,2026-12-31`;
 
-  // https://api.pandascore.co/csgo/matches?filter[opponent_id]=124530&filter[${upcoming}]=true
-
   try {
     const res = await fetch(url, {
       headers: {

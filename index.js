@@ -1,9 +1,9 @@
 const bot = require('./src/config/config');
 const { message } = require('telegraf/filters');
-const BotController = require('./src/controllers/botController');
+const BotCommand = require('./src/commands/botCommand');
 
-const botController = new BotController(bot);
-botController.setupCommands();
+const botCommand = new BotCommand(bot);
+botCommand.setupCommands();
 
 bot.on(message('text'), async (ctx) => {
   console.log(ctx);
