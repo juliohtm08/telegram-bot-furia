@@ -11,8 +11,19 @@ class BotController {
     ctx.reply('resposta de teste 2');
   }
 
+  // obter redes sociais
+  socialMedia(ctx) {
+    ctx.reply(
+      `🔗 <b>Redes Sociais da FURIA</b>:\n
+  📸 <b>Instagram:</b> <a href="https://www.instagram.com/furiagg/">@furiagg</a>\n
+  💬 <b>X:</b> <a href="https://x.com/FURIA">@FURIA</a>\n
+  🌐 <i>Acompanhe tudo sobre a FURIA nas redes sociais!</i>`,
+      { parse_mode: 'HTML' }
+    );
+  }
+
   // obter jogos passados
-  async jogos(ctx) {
+  async matches(ctx) {
     const matches = await fetchPastMatches();
 
     if (!matches || matches.length === 0) {
@@ -68,6 +79,7 @@ class BotController {
     ctx.reply(formattedMatches.join('\n\n'));
   }
 
+  // obter time atual
   async team(ctx) {
     const players = await fecthTeam();
 

@@ -11,10 +11,13 @@ class BotCommand {
     this.bot.command('test', this.commands.test);
 
     // comando '/jogos'
-    this.bot.command('jogos', (ctx) => this.commands.jogos(ctx));
+    this.bot.command('jogos', (ctx) => this.commands.matches(ctx));
 
     //comando '/team'
     this.bot.command('time', (ctx) => this.commands.team(ctx));
+
+    //comando '/redes'
+    this.bot.command('redes', this.commands.socialMedia);
   }
 }
 
