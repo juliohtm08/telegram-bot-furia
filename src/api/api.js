@@ -8,6 +8,8 @@ const FURIA_TEAM_ID = 124530;
 const fetchMatches = async (status) => {
   const url = `${BASE_URL}/csgo/matches?filter[opponent_id]=${FURIA_TEAM_ID}&filter[${status}]=true&range[begin_at]=2025-01-01,2026-12-31`;
 
+  // https://api.pandascore.co/csgo/matches?filter[opponent_id]=124530&filter[${upcoming}]=true
+
   try {
     const res = await fetch(url, {
       headers: {
@@ -27,9 +29,28 @@ const fetchMatches = async (status) => {
 };
 
 const fetchPastMatches = () => fetchMatches('past');
-const fetchFutureMatches = () => fetchMatches('upcoming');
+
+const fecthTeam = async () => {
+  const url = `${BASE_URL}/csgo/players?filter[team_id]=${FURIA_TEAM_ID}`;
+
+  try {
+    const res = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+      },
+    });
+    if (!res.ok) {
+      throw new Error(`Erro na API: ${res.statusText}`);
+    }
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log(`Erro ao buscar time da FURIA: ${error}`);
+    return null;
+  }
+};
 
 module.exports = {
   fetchPastMatches,
-  fetchFutureMatches,
+  fecthTeam,
 };

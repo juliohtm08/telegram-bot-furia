@@ -1,4 +1,8 @@
-const { fetchPastMatches, fetchFutureMatches } = require('../api/api');
+const {
+  fetchPastMatches,
+  fetchFutureMatches,
+  fecthTeam,
+} = require('../api/api');
 
 const FURIA_TEAM_ID = 124530;
 
@@ -66,6 +70,19 @@ class BotCommands {
       return `🏆 ${match.tournament.name}\n🆚 FURIA vs ${opponentName}\n📅 ${date}\n${result}\n${placar}`;
     });
     ctx.reply(formattedMatches.join('\n\n'));
+  }
+
+  async team(ctx) {
+    const players = await fecthTeam();
+
+    if (!players || players.length === 0) {
+      return ctx.reply('Não foi possível encontrar o time da FURIA!😭');
+    }
+    const formattedPlayers = players.map((player) => {
+      return `👤 ${player.name}`;
+    });
+
+    ctx.reply(`🏆 Time Atual da FURIA:\n\n${formattedPlayers.join('\n')}`);
   }
 }
 
