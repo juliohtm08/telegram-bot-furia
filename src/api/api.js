@@ -1,50 +1,36 @@
 require('dotenv').config();
-const fetch = require('node-fetch');
+const authorizedFetch = require('../utils/authorizedFetch');
 
 const BASE_URL = process.env.BASE_URL;
-const TOKEN = process.env.API_TOKEN;
-const FURIA_TEAM_ID = 124530;
+const FURIA_TEAM_ID = +process.env.FURIA_ID;
 
+// procura as partidas da FURIA no ano de 2025
 const fetchMatches = async (status) => {
   const url = `${BASE_URL}/csgo/matches?filter[opponent_id]=${FURIA_TEAM_ID}&filter[${status}]=true&range[begin_at]=2025-01-01,2026-12-31`;
 
   try {
-    const res = await fetch(url, {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-      },
-    });
-    if (!res.ok) {
-      throw new Error(`Erro na API: ${res.statusText}`);
-    }
-
+    const res = await authorizedFetch(url);
     const data = await res.json();
+
     return data;
   } catch (error) {
-    console.log(`Erro ao buscar partidas ${status}: `, error);
-    return null;
+    return { data: null, error: error.message };
   }
 };
 
 const fetchPastMatches = () => fetchMatches('past');
 
+// procura o time atual da FURIA
 const fecthTeam = async () => {
   const url = `${BASE_URL}/csgo/players?filter[team_id]=${FURIA_TEAM_ID}`;
 
   try {
-    const res = await fetch(url, {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-      },
-    });
-    if (!res.ok) {
-      throw new Error(`Erro na API: ${res.statusText}`);
-    }
+    const res = await authorizedFetch(url);
     const data = await res.json();
+
     return data;
   } catch (error) {
-    console.log(`Erro ao buscar time da FURIA: ${error}`);
-    return null;
+    return { data: null, error: error.message };
   }
 };
 

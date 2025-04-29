@@ -1,14 +1,16 @@
-const BotController = require('../controllers/botController');
+const BotController = require('../controllers/BotController');
+const BotService = require('../services/BotService');
 
 class BotCommand {
   constructor(bot) {
     this.bot = bot;
-    this.commands = new BotController(this.bot); // Registro de comandos
+    const botService = new BotService();
+    this.commands = new BotController(botService);
   }
 
   setupCommands() {
     // comando '/test'
-    this.bot.command('test', this.commands.test);
+    this.bot.command('test', (ctx) => this.commands.test(ctx));
 
     // comando '/jogos'
     this.bot.command('jogos', (ctx) => this.commands.matches(ctx));
@@ -17,7 +19,7 @@ class BotCommand {
     this.bot.command('time', (ctx) => this.commands.team(ctx));
 
     //comando '/redes'
-    this.bot.command('redes', this.commands.socialMedia);
+    this.bot.command('redes', (ctx) => this.commands.socialMedia(ctx));
   }
 }
 
