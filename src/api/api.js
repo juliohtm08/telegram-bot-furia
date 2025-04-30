@@ -14,7 +14,7 @@ const fetchMatches = async (status) => {
 
     return data;
   } catch (error) {
-    return { data: null, error: error.message };
+    throw new Error(`Erro ao buscar partidas na API: ${error}`);
   }
 };
 
@@ -30,7 +30,7 @@ const fecthTeam = async () => {
 
     return data;
   } catch (error) {
-    return { data: null, error: error.message };
+    throw new Error(`Erro ao buscar time na API: ${error}`);
   }
 };
 

@@ -20,6 +20,9 @@ class BotCommand {
 
     //comando '/redes'
     this.bot.command('redes', (ctx) => this.commands.socialMedia(ctx));
+
+    //comando '/comandos'
+    this.bot.command('comandos', (ctx) => this.commands.info(ctx));
   }
 }
 

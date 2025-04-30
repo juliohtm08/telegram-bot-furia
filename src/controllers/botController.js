@@ -22,6 +22,10 @@ class BotController {
   async team(ctx) {
     return this.botService.getCurrentTeam(ctx);
   }
+
+  async info(ctx) {
+    return this.botService.getComands(ctx);
+  }
 }
 
 module.exports = BotController;

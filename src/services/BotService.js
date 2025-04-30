@@ -86,6 +86,19 @@ class botService {
 
     ctx.reply(`🏆 Time Atual da FURIA:\n\n${formattedPlayers.join('\n')}`);
   }
+
+  async getComands(ctx) {
+    const data = ctx.reply(`
+      🔥Comandos disponíveis🔥
+      
+      🎮 /jogos – Veja os últimos confrontos da FURIA no CS2  
+      🧢 /time – Confira quem tá jogando na line atual da FURIA  
+      🌐 /redes – Acompanhe a FURIA nas redes sociais
+      
+      Mais comandos chegando em breve... 👀
+        `);
+    return data;
+  }
 }
 
 module.exports = botService;
